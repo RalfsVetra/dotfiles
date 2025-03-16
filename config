@@ -1,0 +1,10 @@
+mode "display" {
+    bindsym e exec --no-startup-id xrandr --output eDP --off --output DisplayPort-7 --mode 1920x1080 --pos 0x0 --output DisplayPort-9 --primary --mode 1920x1080 --pos 1920x0 --output DisplayPort-8 --mode 1920x1080 --pos 3840x0; mode "default"
+    bindsym l exec --no-startup-id xrandr --output eDP --auto --primary --output DisplayPort-10 --off --output DisplayPort-8 --off --output DisplayPort-9 --off; mode "default"
+
+    # Return to default mode
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+
+bindsym $mod+m mode "display"
