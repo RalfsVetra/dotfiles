@@ -19,28 +19,13 @@
 (add-to-list 'default-frame-alist '(font . "Iosevka-20"))
 
 ;; C mode defaults
-(defun c-lineup-arglist-tabs-only (ignored)
-  "Line up argument lists by tabs, not spaces"
-  (let* ((anchor (c-langelem-pos c-syntactic-element))
-         (column (c-langelem-2nd-pos c-syntactic-element))
-         (offset (- (1+ column) anchor))
-         (steps (floor offset c-basic-offset)))
-    (* (max steps 1)
-       c-basic-offset)))
+(setq-default indent-tabs-mode nil)
+(setq-default c-basic-offset 4)
+(setq-default tab-width 4)
 
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            (c-add-style
-             "linux-tabs-only"
-             '("linux" (c-offsets-alist
-                        (arglist-cont-nonempty
-                         c-lineup-gcc-asm-reg
-                         c-lineup-arglist-tabs-only))))))
-
-(add-hook 'c-mode-hook
-          (lambda ()
-            (setq indent-tabs-mode t)
-            (c-set-style "linux-tabs-only")))
+(add-hook 'c-mode-hook (lambda ()
+                         (interactive)
+                         (c-toggle-comment-style -1)))
 
 ;; Dired
 (require 'dired-x)
@@ -56,7 +41,7 @@
 (setq auto-save-list-file-prefix autosave-dir)
 (setq auto-save-file-name-transforms `((".*" ,autosave-dir t)))
 
-(setq default-directory "/home")
+(setq default-directory "")
 (add-hook 'emacs-startup-hook
           (lambda ()
             (dired default-directory)))
