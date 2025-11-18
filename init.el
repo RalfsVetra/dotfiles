@@ -4,6 +4,8 @@
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+(setq load-path (cons "elisp" load-path))
+
 (setq ring-bell-function 'ignore)
 (setq display-line-numbers-type 'relative)
 (setq inhibit-startup-screen t
@@ -21,31 +23,33 @@
 (load-theme 'gruber-darker t)
 (add-to-list 'default-frame-alist '(font . "Iosevka-20"))
 
-;;; C mode defaults
+;; C mode defaults
 (setq-default c-basic-offset 4)
 (add-hook 'c-mode-hook (lambda ()
                          (interactive)
                          (c-toggle-comment-style -1)))
 
-;;; Dired
+;; Dired
 (require 'dired-x)
 (setq dired-omit-files (concat dired-omit-files "\\|^\\..+$")
       dired-listing-switches "-alh"
       dired-mouse-drag-files t)
 (setq-default dired-dwim-target t)
 
-;;; Backup/autosave
+;; Backup/autosave
 (defvar backup-dir (expand-file-name "~/.emacs.d/backup/"))
 (defvar autosave-dir (expand-file-name "~/.emacs.d/autosave/"))
 (setq backup-directory-alist (list (cons ".*" backup-dir)))
 (setq auto-save-list-file-prefix autosave-dir)
 (setq auto-save-file-name-transforms `((".*" ,autosave-dir t)))
 
-;;; Move text
-(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+;; Move text
 (require 'move-text)
 (global-set-key (kbd "M-p") 'move-text-up)
 (global-set-key (kbd "M-n") 'move-text-down)
 
-;;; Custom keybinds
+;; License templates
+(require 'license-templates)
+
+;; Custom keybinds
 (global-set-key (kbd "C-c d") 'duplicate-line)
