@@ -3,10 +3,8 @@
   (load custom-file))
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/elisp"))
 
-(setq load-path (cons "elisp" load-path))
-
-(setq ring-bell-function 'ignore)
 (setq display-line-numbers-type 'relative)
 (setq inhibit-startup-screen t
       inhibit-startup-echo-area-message user-login-name
