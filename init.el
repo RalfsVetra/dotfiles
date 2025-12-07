@@ -4,6 +4,7 @@
 
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/elisp"))
+(add-to-list 'custom-theme-load-path (file-name-as-directory "~/.emacs.d/themes"))
 
 (setq display-line-numbers-type 'relative)
 (setq inhibit-startup-screen t
@@ -18,7 +19,7 @@
 (set-fringe-mode 0)
 (global-display-line-numbers-mode 1)
 
-(load-theme 'gruber-darker t)
+(load-theme 'focus)
 (add-to-list 'default-frame-alist '(font . "Iosevka-20"))
 
 ;; C mode defaults
@@ -48,6 +49,9 @@
 
 ;; License templates
 (require 'license-templates)
+
+;; Nasm mode
+(add-to-list 'auto-mode-alist '("\\.asm\\'" . nasm-mode))
 
 ;; Custom keybinds
 (global-set-key (kbd "C-c d") 'duplicate-line)
