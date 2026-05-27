@@ -20,26 +20,25 @@
 (load-theme 'vetra t)
 (add-to-list 'default-frame-alist '(font . "Iosevka-20"))
 
-;; Indentation
-(setq-default tab-width 8)
-(setq c-basic-offset 8)
+;; c-mode
+(setq-default c-default-style '((c-mode . "linux")))
 
 ;; Whitespaces
 (setq-default show-trailing-whitespace t)
 
 ;; Dired
 (require 'dired-x)
-(setq dired-omit-files (concat dired-omit-files "\\|^\\..+$")
-      dired-listing-switches "-lah"
+(setq dired-listing-switches "-lah"
       dired-mouse-drag-files t)
 (setq-default dired-dwim-target t)
 
-;; Backup/autosave
-(defvar backup-dir (expand-file-name "~/.emacs.d/backup/"))
-(defvar autosave-dir (expand-file-name "~/.emacs.d/autosave/"))
-(setq backup-directory-alist (list (cons ".*" backup-dir)))
-(setq auto-save-list-file-prefix autosave-dir)
-(setq auto-save-file-name-transforms `((".*" ,autosave-dir t)))
+;; Backup
+(setq backup-directory-alist '(("." . "~/.emacs.d/backup")))
+(setq backup-by-copying t
+      version-control t
+      delete-old-versions t
+      kept-new-versions 20
+      kept-old-versions 5)
 
 ;; Move text
 ;; https://github.com/emacsfodder/move-text
@@ -47,13 +46,14 @@
 (global-set-key (kbd "M-p") 'move-text-up)
 (global-set-key (kbd "M-n") 'move-text-down)
 
-;; Custom keybinds
+;; Custom keybind for duplicating a line
 (global-set-key (kbd "C-c d") 'duplicate-line)
 
 ;; Allow
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 
+;; Interprets ANSI escape codes
 ;; https://endlessparentheses.com/ansi-colors-in-the-compilation-buffer-output.html
 (require 'ansi-color)
 (defun endless/colorize-compilation ()
