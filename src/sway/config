@@ -235,7 +235,7 @@ focus_follows_mouse no
 workspace_layout tabbed
 
 input type:keyboard {
-      xkb_layout us,lv
+      xkb_layout us,lv,de
       xkb_options grp:win_space_toggle
 }
 
