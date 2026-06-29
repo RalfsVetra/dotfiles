@@ -20,8 +20,11 @@
 (load-theme 'vetra t)
 (add-to-list 'default-frame-alist '(font . "Iosevka-20"))
 
-;; c-mode
-(setq-default c-default-style '((c-mode . "linux")))
+;; Styles
+(setq-default indent-tabs-mode nil)
+(setq c-default-style
+      '((c-mode . "linux")
+        (other . "gnu")))
 
 ;; Whitespaces
 (setq-default show-trailing-whitespace t)
@@ -40,13 +43,7 @@
       kept-new-versions 20
       kept-old-versions 5)
 
-;; Move text
-;; https://github.com/emacsfodder/move-text
-(require 'move-text)
-(global-set-key (kbd "M-p") 'move-text-up)
-(global-set-key (kbd "M-n") 'move-text-down)
-
-;; Custom keybind for duplicating a line
+;; Custom keybinds
 (global-set-key (kbd "C-c d") 'duplicate-line)
 
 ;; Allow
@@ -63,3 +60,22 @@
 
 (add-hook 'compilation-filter-hook
           #'endless/colorize-compilation)
+
+;; Move text
+;; https://github.com/emacsfodder/move-text
+(require 'move-text)
+(global-set-key (kbd "M-p") 'move-text-up)
+(global-set-key (kbd "M-n") 'move-text-down)
+
+;; CMake
+;; https://github.com/Kitware/CMake/blob/master/Auxiliary/cmake-mode.el
+(require 'cmake-mode)
+
+;; Clang
+;; https://github.com/llvm/llvm-project/blob/main/clang/tools/clang-format/clang-format.el
+(require 'clang-format)
+(global-set-key (kbd "C-M-<tab>") 'clang-format-buffer)
+
+;; LLVM
+;; https://github.com/llvm/llvm-project/blob/main/llvm/utils/emacs/emacs.el
+(require 'llvm-mode)
