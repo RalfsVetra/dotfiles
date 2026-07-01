@@ -31,7 +31,8 @@
 
 ;; Dired
 (require 'dired-x)
-(setq dired-listing-switches "-lah"
+(setq dired-free-space nil)
+(setq dired-listing-switches "-lAh"
       dired-mouse-drag-files t)
 (setq-default dired-dwim-target t)
 
