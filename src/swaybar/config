@@ -1,0 +1,53 @@
+#!/usr/bin/bash
+
+RED="#FF0000"
+YELLOW="#FFFF00"
+GREEN="#00FF00"
+
+bat_stat=$(cat /sys/class/power_supply/BAT0/status)
+case $bat_stat in
+    'Not charging')
+        bat_stat='IDLE' ;;
+    'Discharging')
+        bat_stat='BAT' ;;
+    'Charging')
+        bat_stat='CHR' ;;
+    *)
+        bat_stat='UNK' ;;
+esac
+
+aud_vol=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{
+    vol = int($2 * 100) "%"
+    if ($3 == "[MUTED]") {
+        print "<span foreground=\"'${YELLOW}'\">" vol " MUTED</span>"
+    } else {
+        print vol
+    }
+}')
+
+net_id=$(/sbin/iwgetid wlp2s0 -r)
+net_wrl=$(cat /sys/class/net/wlp2s0/operstate)
+case $net_wrl in
+    'up')
+        net_wrl="<span foreground=\"${GREEN}\">W: ${net_id}</span>" ;;
+    'down')
+        net_wrl="<span foreground=\"${RED}\">W: down</span>" ;;
+    *)
+        net_wrl="<span foreground=\"${YELLOW}\">W: unknown</span>" ;;
+esac
+
+net_eth=$(cat /sys/class/net/enp1s0f0/operstate)
+case $net_eth in
+    'up')
+        net_eth="<span foreground=\"${GREEN}\">E: up</span>" ;;
+    'down')
+        net_eth="<span foreground=\"${RED}\">E: down</span>" ;;
+    *)
+        net_eth="<span foreground=\"${YELLOW}\">E: unknown</span>" ;;
+esac
+
+date_fmt=$(date '+%H:%M %d/%m/%Y')
+bat_cap=$(cat /sys/class/power_supply/BAT0/capacity)'%'
+cpu_temp=$(awk '{print $1/1000 "°C"}' /sys/class/thermal/thermal_zone0/temp)
+
+echo $net_eth '|' $net_wrl '|' $aud_vol '|' $cpu_temp '|' $bat_cap $bat_stat '|' $date_fmt
