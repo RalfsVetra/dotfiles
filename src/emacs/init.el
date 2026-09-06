@@ -76,7 +76,3 @@
 ;; https://github.com/llvm/llvm-project/blob/main/clang/tools/clang-format/clang-format.el
 (require 'clang-format)
 (global-set-key (kbd "C-M-<tab>") 'clang-format-buffer)
-
-;; LLVM
-;; https://github.com/llvm/llvm-project/blob/main/llvm/utils/emacs/emacs.el
-(require 'llvm-mode)
