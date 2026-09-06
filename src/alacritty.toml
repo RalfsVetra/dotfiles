@@ -1,13 +1,14 @@
 [window]
-title = "term"
+title = "tty"
 dynamic_title = false
 
 [font]
 size = 20
 normal = {family = "IosevkaTerm", style = "Regular"}
 
-[colors]
-cursor = {text = "#000000", cursor = "#ffdd33"}
+[colors.cursor]
+text   = "#000000"
+cursor = "#ffdd33"
 
 [colors.primary]
 foreground = "#e4e4ef"
