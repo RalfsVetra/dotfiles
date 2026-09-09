@@ -1,2 +1,2 @@
-export GTK_THEME="Adwaita:dark"
 export WINEDEBUG=fixme-all
+export GTK_THEME="Adwaita:dark"
