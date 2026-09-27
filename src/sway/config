@@ -239,7 +239,7 @@ hide_edge_borders both
 focus_follows_mouse no
 
 input type:keyboard {
-    xkb_layout us,lv,de
+    xkb_layout lv,de(us)
     xkb_options grp:win_space_toggle
 }
 
